@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <title>健康证信息查询</title>
+</head>
+<script src="vue.js"></script>
+<script type="text/javascript">
+    var Obj =
+    {
+        el: '#app',
+        data: {
+            /*** 健康证信息 ***/
+            City: '宁波',              // 体检城市
+            Name: '于金合',             // 姓名
+            Gender: '男',              // 性别
+            Number: '8084736297',      // 健康证编号
+            Unit: '宁波市妇幼保健院',   // 体检单位
+            Date: '2025年12月20日',     // 体检日期
+
+            /*** 文件信息 ***/
+            PhotoFileName: 'Tou_039.png',         // 照片文件名
+            QrFileName: 'Qr_039.png',             // 二维码文件名
+
+
+            /*** 照片属性 ***/
+            Size: '120px',   // 照片大小
+        }
+    }
+</script>
+<style>
+    #app {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: '等线';
+        font-size: 30px;
+    }
+
+    .box {
+        width: 600px;
+    }
+
+    .box div {
+        height: 60px;
+        line-height: 60px;
+    }
+
+    .touxiang {
+        position: absolute;
+        top: 180px;
+        right: 120px;
+    }
+
+    .zhang {
+        position: absolute;
+        top: 430px;
+        right: 160px;
+        z-index: -1;
+    }
+
+    .footer {
+        font-family: '黑体';
+        color: #828282;
+    }
+
+    .erweima {
+        position: absolute;
+        top: 600px;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <div class="touxiang"><img :src="PhotoFileName" :width="Size"></div>
+        <div class="zhang"><img src="./logo.png" width="160px" alt="" style="transform: rotate(-10deg)"></div>
+        <div class="erweima"><img :src="QrFileName" width="300px"></div>
+        <div style="margin: 30px 0 30px 0; font-size: 40px;"><strong>{{ City }}市食品从业人员健康证明</strong></div>
+        <div class="box">
+            <div>姓 名：<strong>{{ Name }}</strong><span style="margin-left: 180px;">性 别：</span><strong>{{ Gender
+                    }}</strong></div>
+            <div>健康证编号：<strong>{{ Number }}</strong></div>
+            <div>（或其他有效证明）</div>
+            <div>体检单位：<strong>{{ Unit }}</strong></div>
+            <div>体检日期：<strong>{{ Date }}（有效期一年）</strong></div>
+        </div>
+        <div style="height: 520px;"></div>
+        <div class="footer">此健康证信息已上报平台</div>
+    </div>
+</body>
+<script type="text/javascript">
+    var app = new Vue(Obj);
+</script>
+
+</html>

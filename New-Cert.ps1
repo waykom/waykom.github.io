@@ -108,8 +108,9 @@ Write-Host "Number: $nextNumber"
 Write-Host "Date: $certDate"
 
 if ($Commit -or $Push) {
+    $commitMessage = Get-Date -Format "yyyy/MM/dd HH:mm:ss"
     git -C $root add .
-    git -C $root commit -m "Add certificate $next for $Name"
+    git -C $root commit -m $commitMessage
 }
 
 if ($Push) {

@@ -14,7 +14,11 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$root = Split-Path -Parent $MyInvocation.MyCommand.Path
+if ($MyInvocation.MyCommand.Path) {
+    $root = Split-Path -Parent $MyInvocation.MyCommand.Path
+} else {
+    $root = (Get-Location).Path
+}
 $resolvedImage = Resolve-Path -LiteralPath $ImagePath
 $male = [string][char]0x7537
 $female = [string][char]0x5973

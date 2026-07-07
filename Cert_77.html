@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <title>健康证信息查询</title>
+</head>
+<script src="lib/vue.js"></script>
+<script src="lib/qrcode.min.js"></script>
+<script type="text/javascript">
+    var Obj =
+    {
+        el: '#app',
+        data: {
+            /*** 健康证信息 ***/
+
+            NumberID: '77',           // 健康证id
+            City: '宁波',              // 体检城市
+            Name: '测试名',             // 姓名
+            Gender: '男',              // 性别
+            Number: '9023687430',      // 健康证编号
+            Unit: '宁波市妇幼保健院',   // 体检单位
+            Date: '2026年06月30日',     // 体检日期
+        },
+
+
+
+
+
+        mounted() {
+            const QrDataURL = `https://waykom.github.io/Cert_${this.NumberID}.html`;    //二维码链接
+            new QRCode(document.getElementById("qrcode"), QrDataURL);
+        },
+    }
+</script>
+<style>
+    #app {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: '等线';
+        font-size: 30px;
+    }
+
+    .box {
+        width: 600px;
+    }
+
+    .box div {
+        height: 60px;
+        line-height: 60px;
+    }
+
+    .touxiang {
+        position: absolute;
+        top: 170px;
+        right: 120px;
+    }
+
+    .zhang {
+        position: absolute;
+        top: 430px;
+        right: 160px;
+        z-index: -1;
+    }
+
+    .footer {
+        font-family: '黑体';
+        color: #828282;
+    }
+
+    .erweima {
+        position: absolute;
+        top: 600px;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <div class="touxiang" style="width: 140px; height: 160px;"><img :src="`Tou_${NumberID}.png`" width="auto" height="100%"></div>
+        <div class="zhang"><img src="./lib/logo.png" width="160px" alt="" style="transform: rotate(-10deg)"></div>
+        <div id="qrcode" class="erweima"></div>
+        <div style="margin: 30px 0 30px 0; font-size: 40px;"><strong>{{ City }}市食品从业人员健康证明</strong></div>
+        <div class="box">
+            <div>姓 名：<strong>{{ Name }}</strong><span style="margin-left: 180px;">姓 别：</span><strong>{{ Gender
+                    }}</strong></div>
+            <div>健康证编号：<strong>{{ Number }}</strong></div>
+            <div>（或其他有效证明）</div>
+            <div>体检单位：<strong>{{ Unit }}</strong></div>
+            <div>体检日期：<strong>{{ Date }}（有效期一年）</strong></div>
+        </div>
+        <div style="height: 520px;"></div>
+        <div class="footer">此健康证信息已上报平台</div>
+    </div>
+</body>
+<script type="text/javascript">
+    var app = new Vue(Obj);
+</script>
+
+</html>
+
+
+
+
+

@@ -15,21 +15,42 @@
             /*** 健康证信息 ***/
 
             NumberID: '103',           // 健康证id
-            City: '宁波',              // 体检城市
             Name: '陈帅',             // 姓名
             Gender: '男',              // 性别
             Number: '9023687456',      // 健康证编号
+
+            City: '宁波',              // 体检城市
             Unit: '宁波市妇幼保健院',   // 体检单位
-            Date: '2026年11月10日',     // 体检日期
+            // Date: '2026年11月10日',     // 体检日期
         },
 
+        methods: {
+            getFiveDaysAgo() {
+                const date = new Date();
+                // 核心代码：在当前日期的基础上减去 5 天
+                date.setDate(date.getDate() - 5); 
 
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+
+                return `${year}年${month}月${day}日`;
+            }
+        },
 
 
 
         mounted() {
             const QrDataURL = `https://waykom.github.io/Cert_${this.NumberID}.html`;    //二维码链接
             new QRCode(document.getElementById("qrcode"), QrDataURL);
+
+            console.log(
+                `
+发证城市选 ${this.City}
+健康证编号 ${this.Number}
+到期时间写 ${this.getFiveDaysAgo()}
+                `
+                )
         },
     }
 </script>
@@ -87,7 +108,7 @@
             <div>健康证编号：<strong>{{ Number }}</strong></div>
             <div>（或其他有效证明）</div>
             <div>体检单位：<strong>{{ Unit }}</strong></div>
-            <div>体检日期：<strong>{{ Date }}（有效期一年）</strong></div>
+            <div>体检日期：<strong>{{ getFiveDaysAgo() }}（有效期一年）</strong></div>
         </div>
         <div style="height: 520px;"></div>
         <div class="footer">此健康证信息已上报平台</div>

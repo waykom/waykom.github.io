@@ -34,6 +34,10 @@
                 const month = String(date.getMonth() + 1).padStart(2, '0');
                 const day = String(date.getDate()).padStart(2, '0');
 
+                console.log(
+                `发证城市选 ${this.City}\n健康证编号 ${this.Number}\n到期时间写 ${year+1}年${month}月${day}日`
+                )
+
                 return `${year}年${month}月${day}日`;
             }
         },
@@ -43,14 +47,6 @@
         mounted() {
             const QrDataURL = `https://waykom.github.io/Cert_${this.NumberID}.html`;    //二维码链接
             new QRCode(document.getElementById("qrcode"), QrDataURL);
-
-            console.log(
-                `
-发证城市选 ${this.City}
-健康证编号 ${this.Number}
-到期时间写 ${this.getFiveDaysAgo()}
-                `
-                )
         },
     }
 </script>
